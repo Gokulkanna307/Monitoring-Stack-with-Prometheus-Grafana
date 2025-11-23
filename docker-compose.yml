@@ -1,0 +1,19 @@
+services:
+  app:
+    build: .
+    network_mode: "host"
+    command: python app.py
+
+  prometheus:
+    image: prom/prometheus:latest
+    network_mode: "host"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    network_mode: "host"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
