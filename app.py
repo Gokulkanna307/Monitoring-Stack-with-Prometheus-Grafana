@@ -4,9 +4,7 @@ import time
 
 app = Flask(__name__)
 
-# -----------------------------
-# 🎯 Define custom metrics
-# -----------------------------
+
 REQUEST_COUNT = Counter(
     'flask_request_count', 
     'Total number of requests by method and endpoint', 
@@ -19,9 +17,7 @@ REQUEST_LATENCY = Gauge(
     ['endpoint']
 )
 
-# -----------------------------
-# 🚀 Before and after each request
-# -----------------------------
+
 @app.before_request
 def before_request():
     request.start_time = time.time()
@@ -33,9 +29,7 @@ def after_request(response):
     REQUEST_LATENCY.labels(endpoint=request.path).set(resp_time)
     return response
 
-# -----------------------------
-# 🌐 Your actual app routes
-# -----------------------------
+
 @app.route('/')
 def index():
     return "Hello! This is your Monitored Flask App 😊"

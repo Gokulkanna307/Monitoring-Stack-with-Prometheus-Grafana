@@ -24,19 +24,46 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cf03ed3er0lj4d"
+        "uid": "ff556cfs2rqbkf"
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "footer": {
-              "reducers": []
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
             },
-            "inspect": false
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -63,27 +90,34 @@
       },
       "id": 1,
       "options": {
-        "cellHeight": "sm",
-        "frameIndex": 0,
-        "showHeader": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "12.2.0",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cf03ed3er0lj4d"
+            "uid": "ff556cfs2rqbkf"
           },
           "editorMode": "builder",
-          "expr": "flask_request_count_total",
+          "expr": "flask_request_count_created",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "GET Req Count",
-      "transparent": true,
-      "type": "table"
+      "title": "New panel",
+      "type": "timeseries"
     }
   ],
   "preload": false,
@@ -99,6 +133,6 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "New dashboard",
-  "uid": "adw27qx",
-  "version": 1
+  "uid": "adgbksl",
+  "version": 3
 }
