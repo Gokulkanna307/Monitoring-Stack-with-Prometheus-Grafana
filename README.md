@@ -1,93 +1,27 @@
-# Flask App Monitoring Stack (Prometheus + Grafana)
+This project demonstrates a local monitoring stack using Prometheus and Grafana to monitor a sample Flask application.
 
-This project demonstrates a **simple monitoring setup** for a Flask web application using **Prometheus** and **Grafana**, all running with **Docker Compose**.
+The project contains a Flask app that exposes custom metrics, a Prometheus configuration to scrape those metrics, and Grafana dashboards to visualize them.
 
----
+To run the project, you need Docker, Docker Compose, and Git installed on your machine.
 
-## 🚀 Overview
+First, clone the repository from GitHub and navigate to the project directory.
 
-The goal of this project is to:
+Start all the services by running Docker Compose with the build option to ensure fresh images, and in detached mode so containers run in the background.
 
-- Deploy a sample **Flask application**
-- Expose **custom Prometheus metrics**
-- Monitor them using **Prometheus** and visualize in **Grafana**
+You can verify that the containers are running by listing all active Docker containers.
 
-All components are containerized and orchestrated using Docker Compose.
+The Flask application is available on port 5000, Prometheus on port 9090, and Grafana on port 4000.
 
----
+The default credentials for Grafana are username "admin" and password "admin".
 
-## 🧱 Project Structure
+To create a new dashboard in Grafana, open Grafana in a browser, log in, and then select "Create → Dashboard → Add new panel".
 
-├── app.py
-├── requirements.txt
-├── docker-compose.yml
-├── flask_dashboard.json ← Exported Grafana dashboard
-└── README.docx
+Choose Prometheus as the data source, enter your custom metric queries, select the type of visualization you want (like graphs or tables), and save the panel.
 
----
+You can export dashboards by opening the dashboard settings, choosing the JSON model, and saving the file into the dashboards folder.
 
-## 🐳 Docker Compose Setup
+To stop all running containers, use Docker Compose down. To stop a specific container, use Docker stop followed by the container name or ID.
 
-### **docker-compose.yml**
+Make sure no other applications are using the ports 5000, 9090, or 4000 to avoid conflicts.
 
-```yaml
-services:
-  app:
-    build: .
-    network_mode: "host"
-    command: python app.py
-
-  prometheus:
-    image: prom/prometheus:latest
-    network_mode: "host"
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-
-  grafana:
-    image: grafana/grafana:latest
-    network_mode: "host"
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=
-```
-
----
-
-## ▶️ Run the Stack
-
-```bash
-docker-compose up --build -d
-docker ps
-```
-
----
-
-## 🌐 Access the Services
-
-Flask App http://localhost:5000
-Prometheus http://localhost:9090
-Grafana http://localhost:3000
-
----
-
-## 📊 Grafana Dashboard Setup
-
-1. Open Grafana at http://localhost:3000
-2. Add Prometheus as a Data Source
-3. Create a new dashboard and add metrics such as: flask_request_count_total
-4. Once the dashboard looks good, export it:
-   **Dashboard → Settings → JSON Model → Download JSON**
-
----
-
-## 🧹 Stop and Clean Up
-
-```bash
-docker-compose down
-docker system prune -a #optional To remove all images and volumes
-```
-
----
-
-## ✅ Summary
-
-**This completes the Flask + Prometheus + Grafana Monitoring Stack! 🎉**
+The Flask app exposes metrics at the /metrics endpoint, which Prometheus scrapes for monitoring.
